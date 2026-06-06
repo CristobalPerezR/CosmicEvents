@@ -1,0 +1,58 @@
+.Container-Setting-AR{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Container-Setting-AR > h2{
+    text-align: center;
+}
+
+
+/* BESTS */
+.AR-Bests{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AR-Bests .BestPhoto{
+    height: 90%;
+    width: 50%;
+    text-align: center;
+}
+
+.BestPhoto > img {
+    height: 100%;
+    width: 100%;
+    opacity: 0.75;
+}
+
+
+/* METRICS */
+.AR-Metrics{
+    /* border: 1px solid white; */
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.AR-Metrics > div{
+    display: flex;
+    width: 80%;
+    height: 100%;
+    /* border: 1px solid green; */
+}
+
+.AR-Metrics > div > span{
+    /* border: 1px solid green; */
+    width: 100%;
+    font-size: medium;
+}
+
+.AR-Update-Time{
+    /* border: 1px solid green; */
+    height: 5%;
+    font-size: 10px;
+}

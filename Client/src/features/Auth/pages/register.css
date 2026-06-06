@@ -1,0 +1,165 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.main-container-register{
+    width: 100%;
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-navbar{
+    justify-content: space-between;
+    padding-top: 10px;
+    display: flex;
+    width: 600px;
+    align-items: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #1C2128;
+}
+
+.register-form-title{
+    width: 55%;
+    color: #E6EDF3;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0px;
+}
+
+.register-backicon{
+    width: 30px;
+    height: 20px;
+    transition: 0.3s;
+}
+
+.register-backicon:hover{
+    color: gray;
+    transform: translateY(-2px);
+}
+
+
+
+.login-text{
+    color: #E6EDF3;
+    font-size: 15px;
+}
+
+.login-link{
+    color: #E6EDF3;
+}
+
+.register-saturnicon{
+    width: 200px;
+}
+
+.login-link:active{
+    color: gray;
+}
+
+.container-cards-register{
+    display: flex;
+    background: #1C2128;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    width: 100%;
+    max-width: 600px;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
+    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+    text-align: center;
+}
+
+.register-image{
+    border-left: 5px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-top: 0px;
+    border-style: solid;
+    border-color: #1C2128;
+
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-image h2{
+    color: #E6EDF3;
+}
+
+.register-card{
+    width: 55%;
+}
+
+.register-form .input-group {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.register-form .wrong_psw{
+  border-bottom: 1px solid red;
+}
+
+.register-form .wrong_psw input:focus{
+  border-bottom: 1px solid red;
+}
+
+.register-form .good_psw{
+  border-bottom: 1px solid rgb(8, 190, 29);
+}
+
+.register-form .good_psw input:focus{
+  border-bottom: 1px solid rgb(8, 190, 29);
+}
+
+.register-form label {
+  display: block;
+  color: #E6EDF3;
+  /* font-size: 0.95rem; */
+  margin-bottom: 8px;
+}
+
+.register-form input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #30363D;
+  color: #E6EDF3;
+  padding: 8px 0 12px 0;
+  transition: all 0.3s ease;
+}
+
+.register-form input:focus {
+  border-bottom: 1px solid #E6EDF3;
+  outline: none;
+}
+
+.register-button {
+  width: 40%;
+  padding: 14px;
+  background: #1e1455;
+  color: #E6EDF3;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.register-button:hover {
+  background: #58A6FF;
+  transform: translateY(-2px);
+}

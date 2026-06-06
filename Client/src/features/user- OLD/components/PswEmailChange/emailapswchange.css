@@ -1,0 +1,84 @@
+.Container-Setting-PswC{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+.Container-Setting-PswC > h2{
+    text-align: center;
+}
+
+.Container-Setting-PswC .PswC-Form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    padding: 20px;
+}
+
+.Container-Setting-PswC .PswC-Form > div{
+    display: flex;
+}
+
+.Container-Setting-PswC .PswC-Form > div > div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.Container-Setting-PswC label{
+    font-size: medium;
+    height: 100%;
+    align-self: flex-end;
+}
+
+.Container-Setting-PswC .PswC-Form > div > div > input{
+    margin-left: 5px;
+}
+
+.Container-Setting-PswC input {
+    flex: 100;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #30363D;
+    color: #E6EDF3;
+    padding: 8px 0 12px 0;
+    transition: all 0.3s ease;
+}
+
+.Container-Setting-PswC input:focus {
+    border-bottom: 1px solid #E6EDF3;
+    outline: none;
+}
+
+.Container-Setting-PswC .div-button{
+    padding-top: 30px;
+    display: flex;
+    width: 30%;
+    align-self: center;
+}
+
+.PswC-Button {
+    width: 100%;
+    padding: 14px;
+    background: #1e1455;
+    color: #E6EDF3;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.PswC-Button:hover {
+    background: #58A6FF;
+    transform: translateY(-2px);
+}

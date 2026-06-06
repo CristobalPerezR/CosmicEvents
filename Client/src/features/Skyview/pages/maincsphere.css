@@ -1,0 +1,49 @@
+.Container-CS{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.Container-CS .Showing{
+    padding-top: 60px;
+    transition: 0.4s ease;
+    padding: 0px 10px 5px 10px; /* top right bottom left */
+    text-align: center;
+    background-color: #161B22;
+    box-shadow: 2px 2px 5px black;
+    color: #E6EDF3;
+
+    cursor: pointer;
+}
+
+.Container-CS .Showing span{
+    user-select: none;
+}
+
+.Container-CS .show{
+    padding-top: 60px;
+}
+
+.Container-CS .hidden{
+    padding-top: 0px;
+    background-color: rgba(22, 27, 34, 0.122);
+    color: rgba(230, 237, 243, 0.122);
+}
+
+.Container-CS .hidden:hover{
+    /* background-color: #161B22; */
+    color: #E6EDF3;
+}
+
+.APP-CS{
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+}
+
+.APP-CS img{
+    user-select: none;
+    height: 99%;
+}

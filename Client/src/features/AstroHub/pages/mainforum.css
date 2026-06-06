@@ -1,0 +1,9 @@
+.AstroHub-Container{
+    width: 100%;
+}
+
+.Post-Image{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

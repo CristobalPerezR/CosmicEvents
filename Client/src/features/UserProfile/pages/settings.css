@@ -1,0 +1,182 @@
+.Container-Settings{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Container-Settings h2{
+    color: #E6EDF3;
+}
+
+.Container-Settings .Set-EmailPswLoc{
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+
+    align-items: center;
+}
+
+.Container-Settings .Set-EmailPswLoc > div{
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+}
+
+.Container-Settings .Set-EmailPswLoc > div > div{
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-align: left;
+}
+
+.Container-Settings .Set-EmailPswLoc a{
+    padding-right: 10px;
+    padding-left: 5px;
+    width: 80%;
+}
+
+.Container-Settings .Set-EmailPswLoc button{
+    border: 1px solid #1C2128;
+    height: 80%;
+    background: #2b69c1;
+    color: #E6EDF3;
+    border-radius: 8px;
+}
+
+
+.Container-Settings .Set-EmailPswLoc > div > div:not(:last-child):not(:first-child) > button{
+    width: 100%;
+}
+
+.Container-Settings .Set-EmailPswLoc > div > div:last-child > button, div:first-child > button{
+    width: 20%;
+}
+
+.Container-Settings .Set-EmailPswLoc > div > div > button:not(:disabled):hover{
+    background: #4e92df;
+}
+
+.Container-Settings .Set-EmailPswLoc > div > div > button:not(:disabled):active{
+    background: #4e92dfb6;
+}
+
+/* Notifications */
+.Container-Settings .Set-Notifications{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Container-Settings .Set-Notifications .Not-Forms{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.Container-Settings .Set-Notifications .Not-Forms > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.Container-Settings .Set-Notifications > .Notif-Expand{
+    display: flex;
+    width: 50%;
+    border: 1px solid white;
+}   
+
+
+.Container-Settings .Set-Notifications > .Notif-Expand > div{
+    width: 100%;
+}   
+
+.Container-Settings .Set-Notifications > .Notif-Expand > div:last-child{
+    border-left: 1px solid white;
+}
+
+.Container-Settings .Set-Notifications > .Notif-Expand > div > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container-Settings .Set-Notifications a{
+    padding-right: 5px;
+}
+
+.Container-Settings .Set-Notifications > div:last-child{
+    padding-top: 5px;
+    width: 50%;
+}
+
+.Container-Settings .Set-Notifications > div > button{
+    width: 20%;
+    height: 100%;
+    border: 1px solid #1C2128;
+    background: #2EA043;
+    color: #E6EDF3;
+    border-radius: 8px;
+}
+
+.Container-Settings .Set-Notifications > div > button:hover{
+    background: #3FB950;
+}
+
+.Container-Settings .Set-Notifications > div > button:active{
+    background: rgba(46, 160, 67, 0.678);
+}
+
+/* ANIMATIONS */
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #666;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 4px;
+    bottom: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+input:checked + .slider::before {
+    transform: translateX(17px);
+}
+
+input:checked + .slider{
+    background-color: rgb(88, 88, 158);
+}

@@ -1,0 +1,56 @@
+.MainHeader-nav-bar {
+    background:
+        radial-gradient(
+            circle at left,
+            rgba(76, 62, 147, 0.229) 0%,
+            #161B22 35%
+        );
+    background-color: #161B22;
+
+    padding: 20px 25px;
+    height: 20px;
+    box-shadow: 0px 4px 10px black;
+}
+
+.MainHeader-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.MainHeader-title-icon{
+    width: 40px;
+    align-self: center;
+    object-fit: contain;
+    padding-top: 5px;
+}
+
+.MainHeader-title{
+    color: #E6EDF3;
+    padding-left: 5px;
+    text-decoration: none;
+}
+
+.MainHeader-title-container{
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.MainHeader-title-container h2{
+    color: #E6EDF3;
+    font-size: medium;
+}
+
+.MainHeader-links{
+    color: #E6EDF3;
+    text-decoration: none;
+    margin-right: 10px;
+    transition-delay: 0.3s;
+    transition: all 0.3s ease;
+}
+
+.MainHeader-links:hover{
+    color: #e6edf3b5;
+}

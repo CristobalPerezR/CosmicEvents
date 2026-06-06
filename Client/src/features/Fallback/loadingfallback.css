@@ -1,0 +1,67 @@
+div#root{
+    height: 100%;
+}
+
+.fall-container{
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+
+    color: #E6EDF3;
+}
+
+.fall-container > div {
+    height: 50%;
+}
+
+.fall-container > div .nebulosa {
+    height: 100%;
+    transform: translateX(3em);
+    opacity: 0;
+
+    /* Calculamos la posición usando: 
+       Centro (50%) + Radio (20%) * cos/sin del ángulo 
+    */
+    /* --radius: 15%; 
+    clip-path: circle(35px at 
+        calc(45% + (var(--radius) * cos(var(--angle)))) 
+        calc(67% + (var(--radius) * sin(var(--angle))))
+    );
+
+    animation: orbitaRevelado 4s linear infinite; */
+}
+
+/* @property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes orbitaRevelado {
+    from {
+        --angle: 120deg;
+    }
+    to {
+        --angle: -240deg;
+    }
+} */
+
+.fall-container > div .lupa{
+    width: 100px;
+    height: 100px;
+    animation: orbita 3s linear infinite;
+}
+
+.fall-container > div .lupa path{
+    fill: #E6EDF3;
+}
+
+@keyframes orbita {
+    from {
+        transform: translate(-16em, -3em) rotate(360deg) translateX(-3em) rotate(-360deg);
+    }
+    to {
+        transform: translate(-16em, -3em) rotate(0deg) translateX(-3em) rotate(0deg);
+    }
+}

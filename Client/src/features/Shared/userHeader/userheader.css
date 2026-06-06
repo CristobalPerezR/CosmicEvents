@@ -1,0 +1,198 @@
+.UserHeader-nav-bar {
+    background:
+        radial-gradient(
+            circle at left,
+            rgba(76, 62, 147, 0.229) 0%,
+            #161B22 35%
+        );
+    background-color: #161B22;
+    
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    z-index: 4;
+    
+    padding: 0% 5%;
+    height: 60px;
+    box-shadow: 0px 4px 10px black;
+    transition: transform 0.4s ease;
+}
+
+.header-visible {
+    transform: translateY(0);
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+.UserHeader-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+/*#region UserHeader-title */
+
+.UserHeader-title-icon{
+    width: 40px;
+    align-self: center;
+    object-fit: contain;
+    padding-top: 5px;
+}
+
+.UserHeader-title{
+    color: #E6EDF3;
+    padding-left: 5px;
+    text-decoration: none;
+}
+
+.UserHeader-title-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.UserHeader-title-container h2{
+    color: #E6EDF3;
+    font-size: small;
+}
+
+/*#endregion*/
+
+/*#region UserHeader-items */
+.UserHeader-items{
+    display: flex;
+    width: 88%;
+    height: 100%;
+}
+
+.UserHeader-items div{
+    height: 100%;
+    align-content: center;
+}
+
+.UserHeader-items div > a{
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 90%;
+    display: block;
+    align-content: center;
+    text-decoration: none;
+    color: #E6EDF3;
+}
+
+.UserHeader-items div > a:hover{
+    color: #e6edf3b5;
+    cursor: pointer;
+    user-select: none;
+}
+
+.UserHeader-items > div:last-child{
+    margin-left: auto;
+}
+
+.UserHeader-items .UserLinks-deploy{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e6edf300;
+}
+
+.UserHeader-items .UserLinks-deploy:active{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E6EDF3;
+    border-radius: 5px;
+}
+
+.UserHeader-items .UserLinks-deploy > span{
+    font-size: 12px;
+}
+
+
+.UserHeader-items .opened{
+    border-color: #E6EDF3;
+    border-radius: 5px;
+    background-color: #1d232d;
+}
+
+/*#endregion*/
+
+/*#region Dropdown_Menues */
+.Dropdowns_Menues > div{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #161B22;
+    z-index: 3;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px black;
+    transition: transform 0.4s ease;
+}
+
+.Dropdowns_Menues > div > div{
+    height: 100%;
+}
+
+.Dropdowns_Menues > div > div:last-child{
+    padding-bottom: 5px;
+}
+
+.Dropdowns_Menues a{
+    font-size: medium;
+    height: 90%;
+    display: block;
+    text-decoration: none;
+    color: #E6EDF3;
+}
+
+.Dropdowns_Menues a:hover{
+    color: #e6edf3b5;
+    cursor: pointer;
+    user-select: none;
+}
+
+.closemenu{
+    transform: translateY(-110%);
+}
+.openmenu{
+    transform: translateY(68px);
+}
+
+/*#endregion*/
+
+/*#region Dropdown_Setting */
+
+.Dropdown_Setting{
+    padding: 5px 30px;
+    right: 5%;
+}
+
+/*#endregion*/
+
+/*#region Dropdown_Help */
+
+.Dropdown_Help{
+    padding: 5px 30px;
+    left: 610px;
+}
+
+/*#endregion*/
+
+/*#region Dropdown_Explore */
+.Dropdown_Explore{
+    padding: 5px 30px;
+    left: 487px;
+}
+
+/*#endregion*/

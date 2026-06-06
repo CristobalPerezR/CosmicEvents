@@ -1,0 +1,109 @@
+.Container-UserInfo{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #E6EDF3;
+}
+
+/* PERFIL */
+.Container-UserInfo .UI-Perfil{
+    /* height: 42%; */
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Container-UserInfo .UI-Perfil .UI-Perfil-Image{
+    position: relative;
+}
+
+.UI-Perfil-Name{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.UI-Perfil-Name > div{
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+}
+
+.UI-Perfil-Name > div:not(:first-child){
+    justify-content: space-between;
+}
+
+.UI-Perfil-Name > div > input{
+    color: #E6EDF3;
+    background: transparent;
+    border-bottom: 1px solid #30363D;
+    width: 90%;
+    border: none;
+    font-style: italic;
+}
+
+.UI-Perfil-Name > div > input:focus{
+    border-bottom: 1px solid #E6EDF3;
+    outline: none;
+}
+
+.UI-Perfil-Image .Image-Perfil{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.UI-Perfil-Image .Change-Photo{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    opacity: 0;
+
+    top: 50px;
+    left: 50px;
+}
+
+.UI-Perfil-Image:hover .Change-Photo{
+    opacity: 0.75;
+}
+
+.UI-Perfil-Image:active .Change-Photo{
+    opacity: 1;
+}
+
+/* Buttons */
+
+.UI-Buttons{
+    width: 60%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.UI-Buttons > button{
+    display: flex;
+    width: 100%;
+    border: 2px solid #1C2128;
+    border-radius: 8px;
+    background: #282f38ca;
+    color: #E6EDF3;
+    justify-content: center;
+    align-items: center;
+}
+
+.UI-Buttons > button > label{
+    padding-left: 3px;
+}
+
+.UI-Buttons > button:not(:disabled):hover{
+    background: #282f38;
+}
+
+.UI-Buttons > button:not(:disabled):active{
+    background: #282f38a1;
+}
