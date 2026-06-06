@@ -1,0 +1,8 @@
+node_modules
+redis.ts
+.env
+
+
+# Not Used but Created
+Global-Use
+globalRouter.ts
