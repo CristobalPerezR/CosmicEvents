@@ -3,14 +3,16 @@ import { useNavigate, Link } from "react-router-dom";
 
 import "./register.css"
 import saturnicon from "/saturnicon2.png"
-import backicon from "../assets/return_icon_cut.png"
-import Header from "../../Shared/publicHeader/MainHeader"
+import PublicHeader from "../../Shared/publicHeader/MainHeader"
 
-import { Register_Service } from "../services/AuthServices";
+import { CheckUsername_Service, Register_Service, CheckEmail_Service } from "../services/AuthServices";
 import LoadingDialog from "../../Shared/components/LoadingDialog";
 
-const RegisterPage = () => {
+import { SignTurnLeft, SignTurnLeftFill } from "react-bootstrap-icons";
+import { useDebounce } from "../../Shared/hooks/useDebounce";
 
+const RegisterPage = () => {
+  
   // REGISTER LOGIC
   const [username, setUsername] = useState("");
   const [name, SetName] = useState("");
@@ -19,6 +21,8 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [checkpsw, SetCheckPsw] = useState<true | false | null>(null);
+  const [checkemail, SetCheckEmail] = useState<true | false | null>(null);
+  const [checkusername, SetCheckUsername] = useState<true | false | null>(null);
   const [execute, SetExecute] = useState(false);
    
   const [dialog, SetDialog] = useState("");
@@ -37,10 +41,56 @@ const RegisterPage = () => {
       }
     }
   });
+
+  const debouncedUsername = useDebounce<string>(username, 800);
+  useEffect(() => {// Evitamos disparar la petición si el input está vacío
+    if (!debouncedUsername.trim()) {
+      SetCheckUsername(null);
+      return;
+    }
+    const verifyUsername = async () => {
+      try {
+        const response = await CheckUsername_Service(debouncedUsername);
+        if (response){
+          SetCheckUsername(false);
+        } else{
+          SetCheckUsername(true);
+        };
+        
+      } catch (error) {
+        console.error(error);
+      };
+    };
+
+    verifyUsername();
+  }, [debouncedUsername] );  
+
+  const debouncedEmail = useDebounce<string>(email, 800);
+  useEffect(() => {// Evitamos disparar la petición si el input está vacío
+    if (!debouncedEmail.trim()) {
+      SetCheckEmail(null);
+      return;
+    }
+    const verifyEmail = async () => {
+      try {
+        const response = await CheckEmail_Service(debouncedEmail);
+        if (response){
+          SetCheckEmail(false);
+        } else{
+          SetCheckEmail(true);
+        };
+        
+      } catch (error) {
+        console.error(error);
+      };
+    };
+
+    verifyEmail();
+  }, [debouncedEmail] );  
   
   const handle_register = async (e: React.SyntheticEvent) => {
       e.preventDefault();
-      if (username && name && email){
+      if (checkusername && name && checkemail){
         if (checkpsw){
           SetExecute(true);
         } else{
@@ -57,6 +107,7 @@ const RegisterPage = () => {
         try{
             const res = await Register_Service(name, username, password, email);
             if (res.message === "User Created"){
+                SetMsg("");
                 SetDialog("Success");
 
                 setTimeout(() => {
@@ -77,20 +128,21 @@ const RegisterPage = () => {
 
 
   return(
-    <Header>
-      {dialog === "Loading" && <LoadingDialog show={dialog === "Loading"} modus={dialog} onClose={() => SetDialog("")}/>}
-      {dialog === "Success" && <LoadingDialog show={dialog === "Success"} modus={dialog} onClose={() => SetDialog("")}/>}
-      {dialog === "Failed" && <LoadingDialog show={dialog === "Failed"} modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
+    <PublicHeader>
+      {<LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
       
       <main className="main-container-register">
         <div className="register-navbar">
             <h2 className="register-form-title">Create Account</h2>
-            <Link to="/"><img className="register-backicon" src={backicon} /></Link>
+            <Link to="/">
+              {<SignTurnLeftFill className="active" size={25}></SignTurnLeftFill>}
+              {<SignTurnLeft className="inactive" size={25}></SignTurnLeft>}
+            </Link>
         </div>
         <div className="container-cards-register">
           <div className="register-card">
             <form className="register-form" onSubmit={handle_register}>
-              <div className="input-group">
+              <div className={`input-group ${checkusername === null ? "" : checkusername ? "good_psw" : "wrong_psw"}`}>
                 <label>Username</label>
                 <input
                   type="text"
@@ -110,7 +162,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className={`input-group ${checkemail === null ? "" : checkemail ? "good_psw" : "wrong_psw"}`}>
                 <label>Email</label>
                 <input
                   type="email"
@@ -159,7 +211,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </main>
-    </Header>
+    </PublicHeader>
   );
 };
 

@@ -42,14 +42,13 @@
     width: 80%;
 }
 
-.Container-Settings .Set-EmailPswLoc button{
+.Container-Settings .Set-EmailPswLoc > div button{
     border: 1px solid #1C2128;
     height: 80%;
     background: #2b69c1;
     color: #E6EDF3;
     border-radius: 8px;
 }
-
 
 .Container-Settings .Set-EmailPswLoc > div > div:not(:last-child):not(:first-child) > button{
     width: 100%;
@@ -64,7 +63,24 @@
 }
 
 .Container-Settings .Set-EmailPswLoc > div > div > button:not(:disabled):active{
-    background: #4e92dfb6;
+    background: rgba(78, 146, 223, 0.714);
+}
+
+
+.Container-Settings .Set-EmailPswLoc > button{
+    border: 1px solid #1C2128;
+    height: 25%;
+    background: rgb(187, 14, 14);
+    border-radius: 8px;
+    color: #E6EDF3;
+}
+
+.Container-Settings .Set-EmailPswLoc > button:hover{
+    background: rgb(214, 47, 47);
+}
+
+.Container-Settings .Set-EmailPswLoc > button:active{
+    background: rgba(214, 47, 47, 0.714);
 }
 
 /* Notifications */
@@ -179,4 +195,82 @@ input:checked + .slider::before {
 
 input:checked + .slider{
     background-color: rgb(88, 88, 158);
+}
+
+
+
+
+
+
+/* DIALOG */
+.DA-Dialog{
+    display: none;
+    transition: 0.3s;
+}
+
+.DA-Dialog span{
+    user-select: none;
+}
+
+.DA-Dialog[open]{
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #161B22;
+    border: none;
+    color: #E6EDF3;
+    box-shadow: 2px 2px 10px black;
+    animation: dialogPop 0.3s ease;
+}
+
+@keyframes dialogPop {
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.DA-Dialog > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.DA-Dialog .DA-CancelButton{
+    background: #1e1455;
+    color: #E6EDF3;
+    border: none;
+    border-left: 5px solid #161B22;
+    padding: 5px;
+    /* font-weight: 600; */
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.DA-Dialog .DA-CancelButton:hover{
+  background: #58A6FF;
+}
+
+.DA-Dialog .DA-DeleteButton{
+    background:rgb(187, 14, 14);
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #E6EDF3;
+    transition: 0.3s;
+}
+
+.DA-Dialog .DA-DeleteButton:hover{
+    background: rgb(214, 47, 47);
+}
+
+.DA-Dialog .DA-DeleteButton:active{
+    background: rgba(214, 47, 47, 0.714);
 }

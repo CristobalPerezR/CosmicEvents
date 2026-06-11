@@ -1,6 +1,6 @@
 import { conn } from "../../shared/config/postgres.js";
 
-export const Login = async(
+export const Log_in = async(
     username: string
 ) => {
     const result = await conn.query(
@@ -18,7 +18,7 @@ export const Login = async(
     return result.rows[0] ?? null;
 };
 
-export const CreateAccount = async(
+export const Create_Account = async(
     username: string,
     displayname: string,
     pswhash: string,
@@ -34,7 +34,7 @@ export const CreateAccount = async(
 
 
 /* TOOLS*/
-export const CheckUsername = async(
+export const Check_Username = async(
     username:string
 ) => {
     const result = await conn.query(
@@ -46,7 +46,7 @@ export const CheckUsername = async(
     return (result.rowCount ?? 0) > 0;
 };
 
-export const CheckEmail = async(
+export const Check_Email = async(
     email:string
 ) => {
     const result = await conn.query(
@@ -58,7 +58,7 @@ export const CheckEmail = async(
     return (result.rowCount ?? 0) > 0;
 };
 
-export const GetPsw = async(
+export const Get_Psw = async(
     username:string
 ) => {
     const result = await conn.query(

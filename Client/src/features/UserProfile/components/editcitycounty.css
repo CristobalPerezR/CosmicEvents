@@ -1,0 +1,112 @@
+.Account_Changes{
+    display: none;
+    transition: 0.3s;
+}
+
+.Account_Changes[open]{
+    height: 50%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #161B22;
+    border: none;
+    color: #E6EDF3;
+    box-shadow: 2px 2px 10px black;
+    animation: dialogPop 0.3s ease;
+}
+
+@keyframes dialogPop {
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.Account_Changes h3{
+    color: #E6EDF3;
+}
+
+.Account_Changes form{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.Account_Changes select {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 10px 0;
+
+    background-color: #0D1117;
+    color: #E6EDF3;
+
+    border: 1px solid #30363D;
+    border-radius: 10px;
+
+    font-size: 14px;
+    outline: none;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.Account_Changes select:hover {
+    border-color: #58A6FF;
+}
+
+.Account_Changes select:focus {
+    border-color: #58A6FF;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+}
+
+.Account_Changes select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.Account_Changes option {
+    background-color: #0D1117;
+    color: #E6EDF3;
+}
+
+.Account_Changes button {
+    margin-top: 20px;
+    padding: 12px 24px;
+
+    width: 50%;
+
+    background-color: #238636;
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.Account_Changes button:hover {
+    background-color: #2EA043;
+    transform: translateY(-1px);
+}
+
+.Account_Changes button:active {
+    transform: translateY(0);
+}
+
+.Account_Changes button:disabled {
+    background-color: #30363D;
+    color: #8B949E;
+    cursor: not-allowed;
+    transform: none;
+}

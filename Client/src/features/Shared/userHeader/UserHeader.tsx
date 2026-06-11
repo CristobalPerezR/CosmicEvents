@@ -19,6 +19,8 @@ const UserHeader = ( { children, showHeader = true }: Headerprops ) => {
 
     const handle_logout = () => {
         localStorage.removeItem("cosmic_token");
+        localStorage.removeItem('user');
+        localStorage.removeItem('location');
         navigate("/home");
     }
 

@@ -3,15 +3,18 @@ import { useNavigate, Link } from "react-router-dom";
 
 import "./login.css"
 import saturnicon from "/saturnicon2.png"
-import backicon from "../assets/return_icon_cut.png"
 import Header from "../../Shared/publicHeader/MainHeader"
 
 import { Login_Service } from "../services/AuthServices";
 import LoadingDialog from "../../Shared/components/LoadingDialog";
 
+import { SignTurnLeft, SignTurnLeftFill } from "react-bootstrap-icons";
+
+
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [msg, SetMsg] = useState("");
     const [dialog, SetDialog] = useState("");
 
     const navigate = useNavigate();
@@ -23,31 +26,39 @@ const LoginPage = () => {
         try{
             const res = await Login_Service(username, password);
             if (res.token){
+                SetMsg("");
                 SetDialog("Success");
 
                 setTimeout(() => {
                     localStorage.setItem('cosmic_token', res.token);
-                    navigate('/forum');
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    localStorage.setItem('location', JSON.stringify(res.location));
+                    console.log(res.location);
+                    navigate('/AstroHub');
                 }, 1000);
 
             } else{
+                SetMsg("Incorrect username or password.");
                 SetDialog("Failed");
             }
         } catch(err: any){
+            SetMsg("Something went wrong.");
+            SetDialog("Failed");
             console.log(err);
         }
     }
 
     return(
         <Header>
-            {dialog === "Loading" && <LoadingDialog show={dialog === "Loading"} modus={dialog} onClose={() => SetDialog("")}/>}
-            {dialog === "Success" && <LoadingDialog show={dialog === "Success"} modus={dialog} onClose={() => SetDialog("")}/>}
-            {dialog === "Failed" && <LoadingDialog show={dialog === "Failed"} modus={dialog} onClose={() => SetDialog("")} msg="Incorrect username or password."/>}
+            {<LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
 
             <main className="main-container-login">
                 <div className="login-navbar">
                     <h2 className="login-form-title">Create Account</h2>
-                    <Link to="/"><img className="login-backicon" src={backicon} /></Link>
+                    <Link to="/">
+                        {<SignTurnLeftFill className="active" size={25}></SignTurnLeftFill>}
+                        {<SignTurnLeft className="inactive" size={25}></SignTurnLeft>}
+                    </Link>
                 </div>
                 <div className="container-cards-login">
                     <div className="login-card">

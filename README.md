@@ -60,9 +60,9 @@ COSMIC-EVENTS ARCHITECTURE
 - PostgreSQL + PostGIS integration
 
 ### In Development
+- Account deletion and session management (partially implemented)
 - Astro-Hub post system
 - EXIF metadata extraction
-- Account deletion and session management
 - Three.js event simulation
 - Regional event notifications
 - Redis caching for likes, comments, followers and followings counts.
@@ -82,8 +82,8 @@ See [Limitations.md](./Docs/Limitations.md) for details.
 ### User Management
 * [ ] Profile Page
 * [ ] Update Account information
-* [ ] Delete Account
-* [ ] Notification Settings
+* [x] Delete Account
+* [x] Notification Settings (Only Settings)
 
 ### Astro-Hub
 * [ ] Astrophotography posts

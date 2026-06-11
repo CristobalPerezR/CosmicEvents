@@ -11,7 +11,7 @@ interface Props {
     msg?: string;
 }
 
-const LoadingDialog = ( { show, modus, onClose, msg}: Props ) => {
+const Dialogs = ( { show, modus, onClose, msg}: Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [dots, SetDots] = useState("");
 
@@ -90,6 +90,22 @@ const LoadingDialog = ( { show, modus, onClose, msg}: Props ) => {
                 }
             </div>
         </dialog>
+    )
+}
+
+interface MainProps {
+    modus: string;
+    onClose: () => void;
+    msg?: string;
+}
+
+const LoadingDialog = ( { modus, onClose, msg}: MainProps ) => {
+    return(
+        <>
+            {modus === "Loading" && <Dialogs show={modus === "Loading"} modus={modus} onClose={onClose}/>}
+            {modus === "Success" && <Dialogs show={modus === "Success"} modus={modus} onClose={onClose} msg={msg}/>}
+            {modus === "Failed" && <Dialogs show={modus === "Failed"} modus={modus} onClose={onClose} msg={msg}/>}
+        </>
     )
 }
 

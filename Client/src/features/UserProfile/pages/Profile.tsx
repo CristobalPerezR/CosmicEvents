@@ -29,7 +29,13 @@ const Profile = () => {
     const [editstate, SetEditState] = useState(false);
 
     useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user") as string);
+        const location = JSON.parse(localStorage.getItem("location") as string);
 
+        SetDisplayName(user.display_user);
+        SetUsername(user.username);
+        if (user.profile_image){SetImageUrl(user.profile_image)}
+        if (location.country_sig){SetCountry(location.country_sig)}
     }, []);
 
     const navigate = useNavigate();

@@ -1,12 +1,9 @@
 // Server/src/index.ts
 import express from 'express';
 import cors from "cors";
-import dotenv from "dotenv";
 
 import authRoutes from "./features/router/authRouter.js";
 import userRoutes from "./features/router/userRouter.js";
-
-dotenv.config();
 
 const app = express();
 

@@ -12,6 +12,8 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    user-select: none;
 }
 
 .login-navbar{
@@ -34,16 +36,35 @@ html, body {
     margin: 0px;
 }
 
-.login-backicon{
-    width: 30px;
-    height: 20px;
-    transition: 0.3s;
+.login-navbar > a{
+    position: relative;
+    display: inline-flex; /* Alinea bien el contenido */
+    align-items: center;
+    justify-content: center;
+    width: 25px;  /* Dale el mismo ancho que el tamaño del ícono */
+    height: 25px; /* Dale el mismo alto */
+    cursor: pointer;
+    color:#E6EDF3;
 }
 
-.login-backicon:hover{
-    color: gray;
-    transform: translateY(-2px);
+.login-navbar > a .active, a > .inactive{
+    position: absolute;
 }
+
+.login-navbar > a .active{
+  display: none;
+}
+
+.login-navbar > a:active .inactive{
+    display: none;
+}
+
+.login-navbar > a:active .active{
+    display:block; 
+}
+
+
+
 
 .login-saturnicon{
     width: 200px;

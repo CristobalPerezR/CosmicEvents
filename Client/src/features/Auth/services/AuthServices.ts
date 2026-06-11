@@ -1,9 +1,9 @@
 import axiosInstance from "../../../api/axiosConfig"
 
-export const Login_Service = async (name: string, psw: string) => {
+export const Login_Service = async (username: string, psw: string) => {
     try {
         const res = await axiosInstance.post('/login', {
-            name: name,
+            username: username,
             psw: psw
         });
         return res.data;
@@ -14,11 +14,11 @@ export const Login_Service = async (name: string, psw: string) => {
 };
 
 
-export const Register_Service  = async (name: string, handle: string, psw: string, email: string) => {
+export const Register_Service  = async (username: string, displayname: string, psw: string, email: string) => {
     try {
         const res = await axiosInstance.post('/register', {
-            name: name,
-            handle: handle,
+            username: username,
+            displayname: displayname,
             psw: psw,
             email: email
         });
@@ -28,3 +28,27 @@ export const Register_Service  = async (name: string, handle: string, psw: strin
         throw error;
     }
 };
+
+export const CheckUsername_Service = async (username: string) => {
+    try {
+        const res = await axiosInstance.post('/GET_username', {
+            username: username
+        });
+        return res.data;
+    } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
+export const CheckEmail_Service = async (email: string) => {
+    try {
+        const res = await axiosInstance.post('/GET_email', {
+            email: email
+        });
+        return res.data;
+    } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}

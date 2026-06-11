@@ -12,6 +12,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .register-navbar{
@@ -25,6 +26,34 @@ html, body {
     background-color: #1C2128;
 }
 
+.register-navbar > a{
+    position: relative;
+    display: inline-flex; /* Alinea bien el contenido */
+    align-items: center;
+    justify-content: center;
+    width: 25px;  /* Dale el mismo ancho que el tamaño del ícono */
+    height: 25px; /* Dale el mismo alto */
+    cursor: pointer;
+    color:#E6EDF3;
+}
+
+.register-navbar > a .active, a > .inactive{
+    position: absolute;
+}
+
+.register-navbar > a .active{
+  display: none;
+}
+
+.register-navbar > a:active .inactive{
+    display: none;
+}
+
+.register-navbar > a:active .active{
+    display:block; 
+}
+
+
 .register-form-title{
     width: 55%;
     color: #E6EDF3;
@@ -33,19 +62,6 @@ html, body {
     text-align: center;
     margin: 0px;
 }
-
-.register-backicon{
-    width: 30px;
-    height: 20px;
-    transition: 0.3s;
-}
-
-.register-backicon:hover{
-    color: gray;
-    transform: translateY(-2px);
-}
-
-
 
 .login-text{
     color: #E6EDF3;
