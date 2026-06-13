@@ -26,7 +26,7 @@ export const delete_account = async (
         WHERE user_id = $1`,
         [userID]
     );
-    return result.rowCount;
+    return (result.rowCount ?? 0) > 0;
 };
 
 export const update_email = async (
@@ -39,7 +39,7 @@ export const update_email = async (
         WHERE user_id = $1`,
         [userID, email]
     );
-    return result.rowCount;
+    return (result.rowCount ?? 0) > 0;
 }
 
 export const update_phone = async (
@@ -52,7 +52,7 @@ export const update_phone = async (
         WHERE user_id = $1`,
         [userID , phone ?? null]
     );
-    return result.rowCount;
+    return (result.rowCount ?? 0) > 0;
 };
 
 export const update_city = async(
@@ -92,6 +92,18 @@ export const update_settings = async(
     return (result.rowCount ?? 0) > 0;
 };
 
+export const update_password = async(
+    userID: number,
+    psw_hash: string
+) => {
+    const result = await conn.query(
+        `UPDATE ca_users
+        SET user_psw_hash = $2
+        WHERE user_id = $1`,
+        [userID, psw_hash]
+    );
+    return (result.rowCount ?? 0) > 0;
+}
 
 //#region TOOLS
 
@@ -157,6 +169,18 @@ export const Get_Settings = async(
         FROM ca_notification_settings
         WHERE ns_user_id = $1`,
         [userID] 
+    );
+    return result.rows[0];
+}
+
+export const Get_Password = async(
+    userID: number
+) => {
+    const result = await conn.query(
+        `SELECT user_psw_hash
+        FROM ca_users
+        WHERE user_id = $1`,
+        [userID]
     );
     return result.rows[0];
 }

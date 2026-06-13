@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import * as UserModels from "./user.model.js"
+import bcrypt from "bcrypt";
 
 export const GetUserData = async(userId: number) => {
     const user = await UserModels.get_user_data(userId);
@@ -17,6 +18,7 @@ export const DeleteAccount = async(
         res.status(200).json(del);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -35,6 +37,7 @@ export const UpdateEmail = async(
         res.status(200).json(ap);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -53,6 +56,7 @@ export const UpdatePhone = async(
         res.status(200).json(ap);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -102,13 +106,61 @@ export const UpdateSettings = async(
         res.status(200).json(ap);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
     }
 };
 
+export const UpdatePassword = async(
+    req: Request,
+    res: Response
+) => {
+    try{
+        const userId = parseInt((req as any).user.id);
+        const { psw } = req.body;
+        console.log(psw);
+        const hashedpsw = await bcrypt.hash(psw, 10);
+        const ap = await UserModels.update_password(userId, hashedpsw);
+        
+        res.status(200).json(ap);
+
+    } catch (error){
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Error"
+        })
+    }
+}
+
 //#region TOOLS
+
+//-> Check password match
+export const CheckPassword = async(
+    req: Request,
+    res: Response
+) => {
+    try{
+        const userId = parseInt((req as any).user.id);
+        const { psw } = req.body;
+
+        const hashedpsw = await UserModels.Get_Password(userId);
+        if (await bcrypt.compare(psw, hashedpsw.user_psw_hash)){
+            res.status(200).json(true);
+        } else{
+            res.status(200).json(false);
+        }
+
+    } catch (error){
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Error"
+        })
+    }
+}
+
+
 
 // -> Check if the new email is used by someone else.
 export const CheckEmail = async(
@@ -122,6 +174,7 @@ export const CheckEmail = async(
         res.status(200).json(ap);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -139,6 +192,7 @@ export const GetEmail = async(
         res.status(200).json(email);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -158,6 +212,7 @@ export const CheckPhone = async(
         res.status(200).json(ap);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -175,6 +230,7 @@ export const GetPhone = async(
         res.status(200).json(phone);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -182,7 +238,6 @@ export const GetPhone = async(
 };
 
 // -> Get Notification Settings
-
 export const GetSettings = async(
     req: Request,
     res: Response
@@ -193,6 +248,7 @@ export const GetSettings = async(
         res.status(200).json(settings);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -201,7 +257,6 @@ export const GetSettings = async(
 
 
 //#region GET LOCATION
-
 export const GetCountries = async(
     req: Request,
     res: Response
@@ -211,6 +266,7 @@ export const GetCountries = async(
         res.json(countries);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -227,6 +283,7 @@ export const GetSubdivisions = async(
         res.json(subs);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })
@@ -243,6 +300,7 @@ export const GetCities = async(
         res.json(cities);
 
     } catch (error){
+        console.log(error);
         res.status(500).json({
             message: "Internal Error"
         })

@@ -13,7 +13,7 @@
 .Container-Settings .Set-EmailPswLoc{
     display: flex;
     flex-direction: column;
-    height: 20%;
+    height: 30%;
 
     align-items: center;
 }
@@ -50,11 +50,11 @@
     border-radius: 8px;
 }
 
-.Container-Settings .Set-EmailPswLoc > div > div:not(:last-child):not(:first-child) > button{
+.Container-Settings .Set-EmailPswLoc > div > div > .Change_PSW{
     width: 100%;
 }
 
-.Container-Settings .Set-EmailPswLoc > div > div:last-child > button, div:first-child > button{
+.Container-Settings .Set-EmailPswLoc > div > div > .Change, div:first-child > button{
     width: 20%;
 }
 

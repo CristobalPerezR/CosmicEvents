@@ -28,19 +28,27 @@
     }
 }
 
-.Account_Changes h3{
+.Account_Changes > h3{
     color: #E6EDF3;
 }
 
-.Account_Changes form{
+.Account_Changes > form{
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     align-items: center;
 }
 
-.Account_Changes select {
+.Account_Changes > form > div{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Account_Changes > form > div > select, .Account_Changes > form > div > input{
+    width: 90%;
     padding: 12px 16px;
     margin: 10px 0;
 
@@ -57,26 +65,26 @@
     transition: all 0.2s ease;
 }
 
-.Account_Changes select:hover {
+.Account_Changes > form > div > select:hover {
     border-color: #58A6FF;
 }
 
-.Account_Changes select:focus {
+.Account_Changes > form > div > select:focus, .Account_Changes > form > div > input:focus {
     border-color: #58A6FF;
     box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
 }
 
-.Account_Changes select:disabled {
+.Account_Changes > form > div > select:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.Account_Changes option {
+.Account_Changes > form > div > option {
     background-color: #0D1117;
     color: #E6EDF3;
 }
 
-.Account_Changes button {
+.Account_Changes > form > button {
     margin-top: 20px;
     padding: 12px 24px;
 
@@ -95,18 +103,37 @@
     transition: all 0.2s ease;
 }
 
-.Account_Changes button:hover {
+.Account_Changes > form > button:hover {
     background-color: #2EA043;
     transform: translateY(-1px);
 }
 
-.Account_Changes button:active {
+.Account_Changes > form > button:active {
     transform: translateY(0);
 }
 
-.Account_Changes button:disabled {
+.Account_Changes > form > button:disabled {
     background-color: #30363D;
     color: #8B949E;
     cursor: not-allowed;
     transform: none;
+}
+
+
+.Account_Changes > form > div > .good{
+    border-color: #77ff58;
+}
+
+.Account_Changes > form > div > .good:focus{
+    border-color: #77ff58;
+    box-shadow: 0 0 0 3px rgba(88, 255, 127, 0.2);
+}
+
+.Account_Changes > form > div > .wrong{
+    border-color: #ff5858;
+}
+
+.Account_Changes > form > div > .wrong:focus{
+    border-color: #ff5858;
+    box-shadow: 0 0 0 3px rgba(255, 88, 88, 0.2);
 }

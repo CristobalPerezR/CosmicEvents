@@ -1,7 +1,7 @@
 import LoadingDialog from "../../Shared/components/LoadingDialog";
 import { useEffect, useRef, useState } from "react";
 
-import "./editcitycounty.css"
+import "./accountchanges.css"
 import { GetCities_Service, GetCountries_Service, GetSubdivisions_Service, UpdateCity_Service } from "../services/UserServices";
 
 interface Props{
@@ -102,7 +102,6 @@ const EditCityCountry = ( { show, onClose }:Props ) => {
         const loadCities = async() =>{
             try{
                 const cities = await GetCities_Service(region);
-                console.log(cities)
                 setCities(cities);
             } catch(err: any){
                 console.log(err);

@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import UserHeader from "../../Shared/userHeader/UserHeader";
 import "./settings.css"
 import DeleteAccount from "../components/DeleteAccount";
-import { GetEmail_Service, GetSettings_Service, UpdateSettings_Service } from "../services/UserServices";
+import { GetEmail_Service, GetPhone_Service, GetSettings_Service, UpdateSettings_Service } from "../services/UserServices";
 import LoadingDialog from "../../Shared/components/LoadingDialog";
 import EditCityCountry from "../components/EditCityCountry";
+import UpdateEmail from "../components/UpdateEmail";
+import UpdatePassword from "../components/UpdatePassword";
+import UpdatePhone from "../components/UpdatePhone";
+
 
 const Settings = () =>{ 
     const [dialog, SetDialog] = useState("");
@@ -13,6 +17,7 @@ const Settings = () =>{
     const [city, SetCity] = useState("City");
     const [country, SetCountry] = useState("Country");
     const [useremail, SetUserEmail] = useState("xxxx@xxxx.cl")
+    const [phone, SetPhone] = useState("+XX X XXXX XXXX");
 
     const [shomodal, SetShowModal] = useState("");
 
@@ -77,6 +82,13 @@ const Settings = () =>{
         });
     };
 
+    const getuserphone = async() => {
+        const res = await GetPhone_Service();
+        if (res.user_phone){
+            SetPhone(res.user_phone);
+        }
+    }
+
     useEffect(() => { //Get Configurations
         const location = JSON.parse(localStorage.getItem("location") as string);
 
@@ -84,6 +96,7 @@ const Settings = () =>{
         if (location.city){SetCity(location.city)};
         getuseremail();
         getnotsettings();
+        getuserphone();
     }, []);
 
     const handle_NotifUpdate = async(e: React.SyntheticEvent) => {
@@ -131,14 +144,24 @@ const Settings = () =>{
                         <div>
                             <div>
                                 <a> Email: {useremail} </a>
-                                <button disabled={true}> Change </button>
+                                <button className="Change" onClick={() => {SetShowModal("UE")}}> Change </button>
                             </div>
                             <div>
-                                <button disabled={true}> Change Password </button>
+                                <button className="Change_PSW" onClick={() => {SetShowModal("UPs")}}> Change Password </button>
                             </div>
                             <div>
                                 <a> Location: {city}, {country} </a>
-                                <button onClick={() => {SetShowModal("ECC")}}> Change </button>
+                                <button className="Change" onClick={() => {SetShowModal("ECC")}}>
+                                    {city === "City" && "Add"}
+                                    {city != "City" && "Change"}
+                                </button>
+                            </div>
+                            <div>
+                                <a> Phone: {phone} </a>
+                                <button className="Change" onClick={() => {SetShowModal("UPh")}}>
+                                    {phone === "+XX X XXXX XXXX" && "Add"}
+                                    {phone != "+XX X XXXX XXXX" && "Change"}
+                                </button>
                             </div>
                         </div>
                         <button className="Set-DelButton" onClick={() => {SetShowModal("DA")}}> Delete Account </button>
@@ -232,8 +255,11 @@ const Settings = () =>{
                 </div>
             </div>
 
-            <DeleteAccount show={shomodal === "DA"} onClose={() => {SetShowModal("")}} />
-            <EditCityCountry show={shomodal === "ECC"} onClose={() => {SetShowModal("")}} /> 
+            {shomodal === "DA" && <DeleteAccount show={shomodal === "DA"} onClose={() => {SetShowModal("")}} />}
+            {shomodal === "ECC" && <EditCityCountry show={shomodal === "ECC"} onClose={() => {SetShowModal("")}} />}
+            {shomodal === "UE" && <UpdateEmail show={shomodal === "UE"} onClose={() => {SetShowModal("")}} />}
+            {shomodal === "UPs" && <UpdatePassword show={shomodal === "UPs"} onClose={() => {SetShowModal("")}} />}
+            {shomodal === "UPh" && <UpdatePhone show={shomodal === "UPh"} onClose={() => {SetShowModal("")}} />}
             <LoadingDialog modus={dialog} onClose={() => {SetDialog("")}} msg={msg}/>
         </UserHeader>
     )

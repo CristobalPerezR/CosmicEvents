@@ -11,11 +11,31 @@ export const DeleteAccount_Service = async() => {
     }
 }
 
+export const UpdatePassword_Service = async(psw: string) =>{
+    try{
+        const res = await axiosInstance.post("/update_password", {psw: psw});
+        return res.data;
+    } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
 export const UpdateEmail_Service = async(email: string) =>{
     try{
         const res = await axiosInstance.post("/update_email", {email: email});
         return res.data;
     } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
+export const UpdatePhone_Service = async(phone : string) =>{
+    try{
+        const res = await axiosInstance.post("/update_phone", {phone: phone});
+        return res.data;
+    } catch(error){
         console.error("Error:", error);
         throw error;
     }
@@ -85,9 +105,9 @@ export const CheckPhone_Service = async(phone: string) =>{
     }
 }
 
-export const GetPhone_Service = async(phone: string) =>{
+export const GetPhone_Service = async() =>{
     try{
-        const res = await axiosInstance.post("/TOOL_get_phone", {phone: phone});
+        const res = await axiosInstance.post("/TOOL_get_phone");
         return res.data;
     } catch (error){
         console.error("Error:", error);
@@ -98,6 +118,16 @@ export const GetPhone_Service = async(phone: string) =>{
 export const GetSettings_Service = async() =>{
     try{
         const res = await axiosInstance.post("TOOL_get_settings");
+        return res.data;
+    } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
+export const CheckPassword_Service = async(psw: string) =>{
+    try{
+        const res = await axiosInstance.post("TOOL_check_password", {psw: psw});
         return res.data;
     } catch (error){
         console.error("Error:", error);

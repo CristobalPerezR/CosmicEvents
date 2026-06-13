@@ -33,7 +33,6 @@ const LoginPage = () => {
                     localStorage.setItem('cosmic_token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
                     localStorage.setItem('location', JSON.stringify(res.location));
-                    console.log(res.location);
                     navigate('/AstroHub');
                 }, 1000);
 
