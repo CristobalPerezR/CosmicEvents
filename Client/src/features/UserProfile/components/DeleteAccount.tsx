@@ -12,8 +12,8 @@ interface Props{
 const DeleteAccount = ( { show, onClose }:Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -40,13 +40,13 @@ const DeleteAccount = ( { show, onClose }:Props ) => {
     }, []);
 
     const handle_DelAccount = async() => {
-        SetDialog("Loading");
+        setDialog("Loading");
 
         try{
             const res = await DeleteAccount_Service();
             if (res > 0){
-                SetMsg(": account deleted");
-                SetDialog("Success");
+                setMsg(": account deleted");
+                setDialog("Success");
 
                 setTimeout(() => {
                     localStorage.removeItem("cosmic_token");
@@ -54,21 +54,21 @@ const DeleteAccount = ( { show, onClose }:Props ) => {
                 }, 1000);
                 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
         } catch(error: any){
             if (error.response?.status === 401){
-                SetMsg("Token expired - logging out.");
-                SetDialog("Failed");
+                setMsg("Token expired - logging out.");
+                setDialog("Failed");
 
                 setTimeout(() => {
                     navigate('/home');
                 }, 1000);
 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
             console.log("Error:", error);
             throw error;
@@ -84,7 +84,7 @@ const DeleteAccount = ( { show, onClose }:Props ) => {
                     <button className="DA-CancelButton" onClick={onClose}> Cancelar </button>
                 </div>
             </dialog>
-            {<LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
+            {<LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>}
         </>
     )
 }

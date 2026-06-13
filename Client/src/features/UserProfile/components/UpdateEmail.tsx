@@ -12,38 +12,38 @@ interface Props{
 
 const UpdateEmail = ( { show, onClose }:Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
 
-    const [email, SetEmail] = useState("");
-    const [currentEmail, SetCurrentEmail] = useState("");
-    const [newEmail, SetNewEmail] = useState("");
-    const [confirmEmail, SetConfirmEmail] = useState("");
+    const [email, setEmail] = useState("");
+    const [currentEmail, setCurrentEmail] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [confirmEmail, setConfirmEmail] = useState("");
 
-    const [emailcheck, SetEmailCheck] = useState<true|false|null>(null);
-    const [currentcheck, SetCurrentCheck] = useState<true|false|null>(null);
-    const [existEmail, SetExistEmail] = useState<true|false|null>(null);
+    const [emailcheck, setEmailCheck] = useState<true|false|null>(null);
+    const [currentcheck, setCurrentCheck] = useState<true|false|null>(null);
+    const [existEmail, setExistEmail] = useState<true|false|null>(null);
 
     useEffect(() => {
         if (confirmEmail == ""){
-            SetEmailCheck(null);
+            setEmailCheck(null);
         } else{
             if (newEmail == confirmEmail) {
-                SetEmailCheck(true)
+                setEmailCheck(true)
             } else{
-                SetEmailCheck(false)
+                setEmailCheck(false)
             }
         }
     });
 
     useEffect(() => {
         if (currentEmail == ""){
-            SetCurrentCheck(null);
+            setCurrentCheck(null);
         } else{
             if (email == currentEmail) {
-                SetCurrentCheck(true)
+                setCurrentCheck(true)
             } else{
-                SetCurrentCheck(false)
+                setCurrentCheck(false)
             }
         }
     });
@@ -75,7 +75,7 @@ const UpdateEmail = ( { show, onClose }:Props ) => {
     useEffect(() => {
         const getemail = async() =>{
             const res = await GetEmail_Service();
-            SetEmail(res.user_email);
+            setEmail(res.user_email);
         };
 
         getemail();
@@ -84,16 +84,16 @@ const UpdateEmail = ( { show, onClose }:Props ) => {
     const debouncedEmail = useDebounce<string>(newEmail, 800);
     useEffect(() =>{
         if (!debouncedEmail.trim()) {
-            SetExistEmail(null);
+            setExistEmail(null);
             return;
         }
         const verifyEmail = async () => {
             try {
                 const response = await CheckEmail_Service(debouncedEmail);
                 if (response){
-                    SetExistEmail(false);
+                    setExistEmail(false);
                 } else{
-                    SetExistEmail(true);
+                    setExistEmail(true);
                 };
             
             } catch (error) {
@@ -107,26 +107,26 @@ const UpdateEmail = ( { show, onClose }:Props ) => {
 
     const handle_UpdateEmail = async(e: React.SyntheticEvent) => {
         e.preventDefault();
-        SetDialog("Loading");
+        setDialog("Loading");
         try{
             const update = await UpdateEmail_Service(confirmEmail)
 
             if (update){
-                SetMsg("");
-                SetDialog("Success");
+                setMsg("");
+                setDialog("Success");
 
                 setTimeout(() => {
                     window.location.reload();
                 }, 500);
 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
 
         } catch(err: any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
     }
@@ -137,14 +137,14 @@ const UpdateEmail = ( { show, onClose }:Props ) => {
                 <h3>Update Email</h3>
                 <form onSubmit={handle_UpdateEmail}>
                     <div>
-                        <input className={`${currentcheck === null ? "" : currentcheck ? "good" : "wrong"}`} type="email" placeholder="Current Email" value={currentEmail} onChange={(e) => {SetCurrentEmail(e.target.value)}}/>
-                        <input className={`${existEmail === null ? "" : existEmail ? "good" : "wrong"}`} type="email" placeholder="New Email" value={newEmail} onChange={(e) => {SetNewEmail(e.target.value)}}/>
-                        <input className={`${emailcheck === null ? "" : emailcheck && existEmail ? "good" : "wrong"}`} type="email" placeholder="Confirm Email" value={confirmEmail} onChange={(e) => {SetConfirmEmail(e.target.value)}}/>
+                        <input className={`${currentcheck === null ? "" : currentcheck ? "good" : "wrong"}`} type="email" placeholder="Current Email" value={currentEmail} onChange={(e) => {setCurrentEmail(e.target.value)}}/>
+                        <input className={`${existEmail === null ? "" : existEmail ? "good" : "wrong"}`} type="email" placeholder="New Email" value={newEmail} onChange={(e) => {setNewEmail(e.target.value)}}/>
+                        <input className={`${emailcheck === null ? "" : emailcheck && existEmail ? "good" : "wrong"}`} type="email" placeholder="Confirm Email" value={confirmEmail} onChange={(e) => {setConfirmEmail(e.target.value)}}/>
                     </div>
                     <button disabled={!currentcheck || !existEmail || !emailcheck} onClick={handle_UpdateEmail}>Save</button>
                 </form>
             </dialog>
-            <LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>
+            <LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>
         </>
     )
 }

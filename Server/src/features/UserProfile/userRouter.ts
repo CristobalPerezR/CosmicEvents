@@ -1,17 +1,16 @@
 import { Router } from "express";
-import { UpdateCity, UpdatePhone, UpdateEmail, DeleteAccount, CheckEmail, GetEmail, CheckPhone, GetPhone, GetSettings, UpdateSettings, GetCountries, GetSubdivisions, GetCities, UpdatePassword, CheckPassword } from "../UserProfile/user.controller.js";
+import { UpdateCity, UpdatePhone, UpdateEmail, DeleteAccount, CheckEmail, GetEmail, CheckPhone, GetPhone, GetSettings, UpdateSettings, GetCountries, GetSubdivisions, GetCities, UpdatePassword, CheckPassword, UpdateDisplayname } from "../UserProfile/user.controller.js";
 import { validateToken } from "../../shared/middlewares/TokenMiddleware.js";
 
 const router : Router = Router();
 
 router.post("/delete_account", validateToken, DeleteAccount); // WORK
-
 router.post("/update_email", validateToken, UpdateEmail); // WORK
 router.post("/update_phone", validateToken, UpdatePhone); // WORK
 router.post("/update_city", validateToken, UpdateCity); // WORK
 router.post("/update_settings", validateToken, UpdateSettings); // WORK
-
-router.post("/update_password", validateToken, UpdatePassword); 
+router.post("/update_password", validateToken, UpdatePassword); // WORK
+router.post("/update_displayname", validateToken, UpdateDisplayname); // 
 
 //TOOLS
 router.post("/TOOL_check_email", validateToken, CheckEmail); // WORK

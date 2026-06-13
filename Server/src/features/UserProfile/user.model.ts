@@ -105,6 +105,19 @@ export const update_password = async(
     return (result.rowCount ?? 0) > 0;
 }
 
+export const update_displayname = async(
+    userID: number,
+    displayname: string
+) => {
+    const result = await conn.query(
+        `UPDATE ca_users
+        SET user_display_name = $2
+        WHERE user_id = $1`,
+        [userID, displayname]
+    );
+    return (result.rowCount ?? 0) > 0;
+}
+
 //#region TOOLS
 
 export const Check_Phone = async (

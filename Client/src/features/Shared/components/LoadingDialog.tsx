@@ -13,9 +13,9 @@ interface Props {
 
 const Dialogs = ( { show, modus, onClose, msg}: Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const [dots, SetDots] = useState("");
-
-    const [frameindex, SetFrameIndex] = useState(0);
+    
+    const [dots, setDots] = useState("");
+    const [frameindex, setFrameIndex] = useState(0);
 
     useEffect(() => {
         if(show){
@@ -28,12 +28,12 @@ const Dialogs = ( { show, modus, onClose, msg}: Props ) => {
     // LOADING ANIMATION
     useEffect(() => {
         const interval = setInterval(() => {
-            SetFrameIndex((prev) => {
+            setFrameIndex((prev) => {
                 if (prev === 3) return 0;
                 return prev + 1;
             });
             
-            SetDots((prev) => {
+            setDots((prev) => {
             if (prev === "...") return "";
             return prev + ".";
             });

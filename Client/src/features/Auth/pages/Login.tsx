@@ -8,48 +8,50 @@ import Header from "../../Shared/publicHeader/MainHeader"
 import { Login_Service } from "../services/AuthServices";
 import LoadingDialog from "../../Shared/components/LoadingDialog";
 
+import { useAuth } from "../../../context/AuthContext";
+
 import { SignTurnLeft, SignTurnLeftFill } from "react-bootstrap-icons";
 
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [msg, SetMsg] = useState("");
-    const [dialog, SetDialog] = useState("");
+    const [msg, setMsg] = useState("");
+    const [dialog, setDialog] = useState("");
 
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handle_login = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        SetDialog("Loading");
+        setDialog("Loading");
 
         try{
             const res = await Login_Service(username, password);
             if (res.token){
-                SetMsg("");
-                SetDialog("Success");
+                setMsg("");
+                setDialog("Success");
+
+                login(res.user, res.location, res.token);
 
                 setTimeout(() => {
-                    localStorage.setItem('cosmic_token', res.token);
-                    localStorage.setItem('user', JSON.stringify(res.user));
-                    localStorage.setItem('location', JSON.stringify(res.location));
                     navigate('/AstroHub');
-                }, 1000);
+                }, 600);
 
             } else{
-                SetMsg("Incorrect username or password.");
-                SetDialog("Failed");
+                setMsg("Incorrect username or password.");
+                setDialog("Failed");
             }
         } catch(err: any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
     }
 
     return(
         <Header>
-            {<LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
+            {<LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>}
 
             <main className="main-container-login">
                 <div className="login-navbar">

@@ -34,8 +34,8 @@ export const AppRouter: React.FC = () => {
                         <Route path="/SkyMap" element={<StelarMap />} />
 
                         {/* Users */}
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/profile/settings" element={<Settings />} />
+                        <Route path="/profile/:userlink" element={<Profile />} />
+                        <Route path="/profile/:userlink/settings" element={<Settings />} />
                     </Route>
                 </Routes>
             </Suspense>

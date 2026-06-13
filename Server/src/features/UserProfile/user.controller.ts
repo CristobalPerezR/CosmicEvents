@@ -120,7 +120,6 @@ export const UpdatePassword = async(
     try{
         const userId = parseInt((req as any).user.id);
         const { psw } = req.body;
-        console.log(psw);
         const hashedpsw = await bcrypt.hash(psw, 10);
         const ap = await UserModels.update_password(userId, hashedpsw);
         
@@ -133,6 +132,25 @@ export const UpdatePassword = async(
         })
     }
 }
+
+export const UpdateDisplayname = async(
+    req: Request,
+    res: Response
+) => {
+    try{
+        const userId = parseInt((req as any).user.id);
+        const { displayname } = req.body;
+        const ap = await UserModels.update_displayname(userId, displayname);
+        res.status(200).json(ap);
+
+    } catch (error){
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Error"
+        })
+    }
+}
+
 
 //#region TOOLS
 

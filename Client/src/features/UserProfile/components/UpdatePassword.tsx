@@ -13,24 +13,24 @@ interface Props{
 
 const UpdatePassword = ( { show, onClose }:Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
 
-    const [currentpsw, SetCurrentPsw] = useState("");
-    const [newpsw, SetNewPsw] = useState("");
-    const [confirmpsw, SetConfirmPsw] = useState("");
+    const [currentpsw, setCurrentPsw] = useState("");
+    const [newpsw, setNewPsw] = useState("");
+    const [confirmpsw, setConfirmPsw] = useState("");
 
-    const [checkpsw, SetCheckPsw] = useState<true|false|null>(null);
-    const [matchpsw, SetMatchPsw] = useState<true|false|null>(null);
+    const [checkpsw, setCheckPsw] = useState<true|false|null>(null);
+    const [matchpsw, setMatchPsw] = useState<true|false|null>(null);
 
     useEffect(() => {
         if (confirmpsw == ""){
-            SetMatchPsw(null);
+            setMatchPsw(null);
         } else{
             if (newpsw == confirmpsw) {
-                SetMatchPsw(true)
+                setMatchPsw(true)
             } else{
-                SetMatchPsw(false)
+                setMatchPsw(false)
             }
         }
     });
@@ -62,16 +62,16 @@ const UpdatePassword = ( { show, onClose }:Props ) => {
     const pswDebounce = useDebounce<string>(currentpsw, 800);
     useEffect(() =>{
         if (!pswDebounce.trim()) {
-            SetCheckPsw(null);
+            setCheckPsw(null);
             return;
         }
         const verifypsw = async() =>{
             try{
                 const res = await CheckPassword_Service(currentpsw);
                 if (res){
-                    SetCheckPsw(true);
+                    setCheckPsw(true);
                 } else{
-                    SetCheckPsw(false);
+                    setCheckPsw(false);
                 }
             } catch (error){
                 console.error(error);
@@ -84,11 +84,11 @@ const UpdatePassword = ( { show, onClose }:Props ) => {
     const navigate = useNavigate();
     const handle_UpdatePassword = async(e: React.SyntheticEvent) => {
         e.preventDefault();
-        SetDialog("Loading");
+        setDialog("Loading");
 
         if (!checkpsw || !matchpsw){
-            SetMsg("Please fill the form.")
-            SetDialog("Failed");
+            setMsg("Please fill the form.")
+            setDialog("Failed");
             return;
         }
 
@@ -96,8 +96,8 @@ const UpdatePassword = ( { show, onClose }:Props ) => {
             const update = await UpdatePassword_Service(confirmpsw);
 
             if (update){
-                SetMsg(": logging out.");
-                SetDialog("Success");
+                setMsg(": logging out.");
+                setDialog("Success");
 
                 setTimeout(() => {
                     localStorage.removeItem("user");
@@ -107,13 +107,13 @@ const UpdatePassword = ( { show, onClose }:Props ) => {
                 }, 500);
 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
 
         } catch(err: any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
     }
@@ -125,14 +125,14 @@ const UpdatePassword = ( { show, onClose }:Props ) => {
                 <h3>Update Password</h3>
                 <form onSubmit={handle_UpdatePassword}>
                     <div>
-                        <input className={`${checkpsw === null ? "" : checkpsw ? "good" : "wrong"}`} type="password" placeholder="Current Password" value={currentpsw} onChange={(e) => {SetCurrentPsw(e.target.value)}}/>
-                        <input type="password" placeholder="New Password" value={newpsw} onChange={(e) => {SetNewPsw(e.target.value)}}/>
-                        <input className={`${matchpsw === null ? "" : matchpsw ? "good" : "wrong"}`} type="password" placeholder="Confirm Password" value={confirmpsw} onChange={(e) => {SetConfirmPsw(e.target.value)}}/>
+                        <input className={`${checkpsw === null ? "" : checkpsw ? "good" : "wrong"}`} type="password" placeholder="Current Password" value={currentpsw} onChange={(e) => {setCurrentPsw(e.target.value)}}/>
+                        <input type="password" placeholder="New Password" value={newpsw} onChange={(e) => {setNewPsw(e.target.value)}}/>
+                        <input className={`${matchpsw === null ? "" : matchpsw ? "good" : "wrong"}`} type="password" placeholder="Confirm Password" value={confirmpsw} onChange={(e) => {setConfirmPsw(e.target.value)}}/>
                     </div>
                     <button onClick={handle_UpdatePassword} disabled={!checkpsw || !matchpsw}> Save </button>
                 </form>
             </dialog>
-            <LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>
+            <LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>
         </>
     )
 }

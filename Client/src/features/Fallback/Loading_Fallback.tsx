@@ -5,11 +5,11 @@ import nebulosa from "./assets/Nebulosa_de_OriÃ³n_desde_un_telescopio_de_relaciÃ
 import Lupa from "./assets/lupa.svg?react"
 
 const Loading_Fallback = () => {
-  const [dots, SetDots] = useState("");
+  const [dots, setDots] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      SetDots((prev) => {
+      setDots((prev) => {
         if (prev === "...") return "";
         return prev + ".";
       });

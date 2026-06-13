@@ -5,18 +5,18 @@ import "./maincsphere.css"
 import placeholder from "../assets/placeholder.jpg"
 
 const CelestialSphere = () => {
-  const [showHeader, SetShowHeader] = useState(true);
-  const [text, SetText] =useState("Hide ▲")
+  const [showHeader, setShowHeader] = useState(true);
+  const [text, setText] =useState("Hide ▲")
 
   const Change_State = () =>{
     if (text == "Hide ▲"){
-      SetText("Show ▼")
-      SetShowHeader(false)
+      setText("Show ▼")
+      setShowHeader(false)
     }
 
     if (text == "Show ▼"){
-      SetText("Hide ▲")
-      SetShowHeader(true)
+      setText("Hide ▲")
+      setShowHeader(true)
     }
   }
 

@@ -12,13 +12,13 @@ interface Props{
 
 const UpdatePhone = ( { show, onClose }:Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
 
-    const [newphone, SetNewPhone] = useState("");
-    const [confirmphone, SetConfirmPhone] = useState("");
-    const [checkphone, SetCheckPhone] = useState<true|false|null>(null);
-    const [checkphones, SetCheckPhones] = useState<true|false|null>(null);
+    const [newphone, setNewPhone] = useState("");
+    const [confirmphone, setConfirmPhone] = useState("");
+    const [checkphone, setCheckPhone] = useState<true|false|null>(null);
+    const [checkphones, setCheckPhones] = useState<true|false|null>(null);
 
     
     useEffect(() => {
@@ -47,12 +47,12 @@ const UpdatePhone = ( { show, onClose }:Props ) => {
 
     useEffect(() => {
         if (confirmphone == ""){
-            SetCheckPhones(null);
+            setCheckPhones(null);
         } else{
             if (newphone == confirmphone) {
-                SetCheckPhones(true)
+                setCheckPhones(true)
             } else{
-                SetCheckPhones(false)
+                setCheckPhones(false)
             }
         }
     });
@@ -60,7 +60,7 @@ const UpdatePhone = ( { show, onClose }:Props ) => {
     const phoneDebouce = useDebounce<string>(newphone, 800);
     useEffect(() => {
         if (!phoneDebouce.trim()) {
-            SetCheckPhone(null);
+            setCheckPhone(null);
             return;
         }
 
@@ -68,9 +68,9 @@ const UpdatePhone = ( { show, onClose }:Props ) => {
             try{
                 const res = await CheckPhone_Service(newphone);
                 if (res){
-                    SetCheckPhone(false);
+                    setCheckPhone(false);
                 } else{
-                    SetCheckPhone(true);
+                    setCheckPhone(true);
                 };
 
             } catch(error){
@@ -83,26 +83,26 @@ const UpdatePhone = ( { show, onClose }:Props ) => {
 
     const handle_UpdatePhone = async(e: React.SyntheticEvent) => {
         e.preventDefault();
-        SetDialog("Loading");
+        setDialog("Loading");
         try{
             const update = await UpdatePhone_Service(confirmphone);
 
             if (update){
-                SetMsg("");
-                SetDialog("Success");
+                setMsg("");
+                setDialog("Success");
 
                 setTimeout(() => {
                     window.location.reload();
                 }, 500);
 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
 
         } catch(err: any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
     }
@@ -113,13 +113,13 @@ const UpdatePhone = ( { show, onClose }:Props ) => {
                 <h3> Update Phone </h3>
                 <form onSubmit={handle_UpdatePhone}>
                     <div>
-                        <input className={`${checkphone === null ? "" : checkphone ? "good" : "wrong"}`} type="text" placeholder="New Phone" value={newphone} onChange={(e) => {SetNewPhone(e.target.value)}}/>
-                        <input className={`${checkphones === null ? "" : checkphones && checkphone ? "good" : "wrong"}`} type="text" placeholder="Confirm Phone" value={confirmphone} onChange={(e) => {SetConfirmPhone(e.target.value)}}/>
+                        <input className={`${checkphone === null ? "" : checkphone ? "good" : "wrong"}`} type="text" placeholder="New Phone" value={newphone} onChange={(e) => {setNewPhone(e.target.value)}}/>
+                        <input className={`${checkphones === null ? "" : checkphones && checkphone ? "good" : "wrong"}`} type="text" placeholder="Confirm Phone" value={confirmphone} onChange={(e) => {setConfirmPhone(e.target.value)}}/>
                     </div>
                     <button onClick={handle_UpdatePhone} disabled={!checkphone || !checkphones}> Save </button>
                 </form>
             </dialog>
-            <LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>
+            <LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>
         </>
     )
 }

@@ -58,9 +58,10 @@ COSMIC-EVENTS ARCHITECTURE
 ### Implemented 
 - JWT Authentication (Login/Register)
 - PostgreSQL + PostGIS integration
+- Account deletion and session management
 
 ### In Development
-- Account deletion and session management (partially implemented)
+- Update Profile Image
 - Astro-Hub post system
 - EXIF metadata extraction
 - Three.js event simulation
@@ -81,9 +82,15 @@ See [Limitations.md](./Docs/Limitations.md) for details.
 
 ### User Management
 * [ ] Profile Page
-* [ ] Update Account information
+* [ ] Update Profile Image
+* [x] Update Account information
 * [x] Delete Account
 * [x] Notification Settings (Only Settings)
+* [ ] Diplay Posts
+
+### Profiles Views
+* [ ] Follow & Unfollow
+* [ ] Diplay Posts
 
 ### Astro-Hub
 * [ ] Astrophotography posts

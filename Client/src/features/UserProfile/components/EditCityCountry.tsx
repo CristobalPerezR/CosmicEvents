@@ -27,8 +27,8 @@ type City = {
 const EditCityCountry = ( { show, onClose }:Props ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
 
     const [countries, setCountries] = useState<Country[]>([]);
     const [regions, setRegions] = useState<Region[]>([]);
@@ -115,13 +115,13 @@ const EditCityCountry = ( { show, onClose }:Props ) => {
 
     const handle_CCUpdate = async(e: React.SyntheticEvent) => {
         e.preventDefault();
-        SetDialog("Loading");
+        setDialog("Loading");
         try{
             const update = await UpdateCity_Service(city)
 
             if (update){
-                SetMsg("");
-                SetDialog("Success");
+                setMsg("");
+                setDialog("Success");
 
                 setTimeout(() => {
                     localStorage.removeItem("user");
@@ -133,13 +133,13 @@ const EditCityCountry = ( { show, onClose }:Props ) => {
                 }, 1000);
 
             } else{
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
             }
 
         } catch(err : any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
     }
@@ -192,7 +192,7 @@ const EditCityCountry = ( { show, onClose }:Props ) => {
                     <button onClick={handle_CCUpdate} disabled={!city}> Save </button>
                 </form>
             </dialog>
-            <LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>
+            <LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>
         </>
     )
 }

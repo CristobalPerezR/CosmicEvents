@@ -11,15 +11,15 @@ import UpdatePhone from "../components/UpdatePhone";
 
 
 const Settings = () =>{ 
-    const [dialog, SetDialog] = useState("");
-    const [msg, SetMsg] = useState("");
+    const [dialog, setDialog] = useState("");
+    const [msg, setMsg] = useState("");
 
-    const [city, SetCity] = useState("City");
-    const [country, SetCountry] = useState("Country");
-    const [useremail, SetUserEmail] = useState("xxxx@xxxx.cl")
-    const [phone, SetPhone] = useState("+XX X XXXX XXXX");
+    const [city, setCity] = useState("City");
+    const [country, setCountry] = useState("Country");
+    const [useremail, setUserEmail] = useState("xxxx@xxxx.cl")
+    const [phone, setPhone] = useState("+XX X XXXX XXXX");
 
-    const [shomodal, SetShowModal] = useState("");
+    const [shomodal, setShowModal] = useState("");
 
     const [notifications, setNotifications] = useState({
         receive: false,
@@ -60,7 +60,7 @@ const Settings = () =>{
 
     const getuseremail = async() => {
         const res = await GetEmail_Service();
-        SetUserEmail(res.user_email);
+        setUserEmail(res.user_email);
     };
 
     const getnotsettings = async() => {
@@ -85,15 +85,15 @@ const Settings = () =>{
     const getuserphone = async() => {
         const res = await GetPhone_Service();
         if (res.user_phone){
-            SetPhone(res.user_phone);
+            setPhone(res.user_phone);
         }
     }
 
     useEffect(() => { //Get Configurations
         const location = JSON.parse(localStorage.getItem("location") as string);
 
-        if (location.country){SetCountry(location.country)};
-        if (location.city){SetCity(location.city)};
+        if (location.country){setCountry(location.country)};
+        if (location.city){setCity(location.city)};
         getuseremail();
         getnotsettings();
         getuserphone();
@@ -103,7 +103,7 @@ const Settings = () =>{
         e.preventDefault();
 
         if (JSON.stringify(old_notifications) != JSON.stringify(notifications)){
-            SetDialog("Loading");
+            setDialog("Loading");
             try{
                 const update = await UpdateSettings_Service(
                     notifications.receive,
@@ -114,21 +114,21 @@ const Settings = () =>{
                 );
 
                 if (update){
-                    SetMsg("");
-                    SetDialog("Success");
+                    setMsg("");
+                    setDialog("Success");
 
                     setTimeout(() => {
                         window.location.reload();
                     }, 1000);
 
                 } else{
-                    SetMsg("Something went wrong.");
-                    SetDialog("Failed");
+                    setMsg("Something went wrong.");
+                    setDialog("Failed");
                 }
 
             } catch(err : any){
-                SetMsg("Something went wrong.");
-                SetDialog("Failed");
+                setMsg("Something went wrong.");
+                setDialog("Failed");
                 console.log(err);
             }
         }
@@ -144,27 +144,27 @@ const Settings = () =>{
                         <div>
                             <div>
                                 <a> Email: {useremail} </a>
-                                <button className="Change" onClick={() => {SetShowModal("UE")}}> Change </button>
+                                <button className="Change" onClick={() => {setShowModal("UE")}}> Change </button>
                             </div>
                             <div>
-                                <button className="Change_PSW" onClick={() => {SetShowModal("UPs")}}> Change Password </button>
+                                <button className="Change_PSW" onClick={() => {setShowModal("UPs")}}> Change Password </button>
                             </div>
                             <div>
                                 <a> Location: {city}, {country} </a>
-                                <button className="Change" onClick={() => {SetShowModal("ECC")}}>
+                                <button className="Change" onClick={() => {setShowModal("ECC")}}>
                                     {city === "City" && "Add"}
                                     {city != "City" && "Change"}
                                 </button>
                             </div>
                             <div>
                                 <a> Phone: {phone} </a>
-                                <button className="Change" onClick={() => {SetShowModal("UPh")}}>
+                                <button className="Change" onClick={() => {setShowModal("UPh")}}>
                                     {phone === "+XX X XXXX XXXX" && "Add"}
                                     {phone != "+XX X XXXX XXXX" && "Change"}
                                 </button>
                             </div>
                         </div>
-                        <button className="Set-DelButton" onClick={() => {SetShowModal("DA")}}> Delete Account </button>
+                        <button className="Set-DelButton" onClick={() => {setShowModal("DA")}}> Delete Account </button>
                     </div>
 
                     <hr />
@@ -255,12 +255,12 @@ const Settings = () =>{
                 </div>
             </div>
 
-            {shomodal === "DA" && <DeleteAccount show={shomodal === "DA"} onClose={() => {SetShowModal("")}} />}
-            {shomodal === "ECC" && <EditCityCountry show={shomodal === "ECC"} onClose={() => {SetShowModal("")}} />}
-            {shomodal === "UE" && <UpdateEmail show={shomodal === "UE"} onClose={() => {SetShowModal("")}} />}
-            {shomodal === "UPs" && <UpdatePassword show={shomodal === "UPs"} onClose={() => {SetShowModal("")}} />}
-            {shomodal === "UPh" && <UpdatePhone show={shomodal === "UPh"} onClose={() => {SetShowModal("")}} />}
-            <LoadingDialog modus={dialog} onClose={() => {SetDialog("")}} msg={msg}/>
+            {shomodal === "DA" && <DeleteAccount show={shomodal === "DA"} onClose={() => {setShowModal("")}} />}
+            {shomodal === "ECC" && <EditCityCountry show={shomodal === "ECC"} onClose={() => {setShowModal("")}} />}
+            {shomodal === "UE" && <UpdateEmail show={shomodal === "UE"} onClose={() => {setShowModal("")}} />}
+            {shomodal === "UPs" && <UpdatePassword show={shomodal === "UPs"} onClose={() => {setShowModal("")}} />}
+            {shomodal === "UPh" && <UpdatePhone show={shomodal === "UPh"} onClose={() => {setShowModal("")}} />}
+            <LoadingDialog modus={dialog} onClose={() => {setDialog("")}} msg={msg}/>
         </UserHeader>
     )
 }

@@ -7,27 +7,28 @@ import { useEffect, useState } from "react";
 import { GearFill, BoxArrowLeft, InfoLg, Camera2, PersonBoundingBox, PersonFill, Calendar2Event } from "react-bootstrap-icons";
 import { CaretDown, CaretDownFill } from "react-bootstrap-icons";
 
+import { useAuth } from "../../../context/AuthContext";
+
 interface Headerprops {
     children: React.ReactNode;
     showHeader?: boolean;
 }
 
 const UserHeader = ( { children, showHeader = true }: Headerprops ) => {
-    const [menuid, SetMenuId] = useState(0) // 1: Explore | 2: Help | 3: Account | 0: None
+    const [menuid, setMenuId] = useState(0) // 1: Explore | 2: Help | 3: Account | 0: None
 
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const handle_logout = () => {
-        localStorage.removeItem("cosmic_token");
-        localStorage.removeItem('user');
-        localStorage.removeItem('location');
+        logout();
         navigate("/home");
     }
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape"){
-                SetMenuId(0);
+                setMenuId(0);
             }
         };
 
@@ -56,19 +57,19 @@ const UserHeader = ( { children, showHeader = true }: Headerprops ) => {
                         <div> <Link to="/AstroHub"> Astro-Hub </Link> </div>
                         <div> <Link to="/SkyMap"> SkyViewer </Link> </div>
                         <div> <a className={`UserLinks-deploy ${menuid==1 ? "opened" : ""}`} onClick={() => 
-                            {if (menuid == 1){SetMenuId(0)}else{SetMenuId(1)}}}> 
+                            {if (menuid == 1){setMenuId(0)}else{setMenuId(1)}}}> 
                             {menuid === 1 && <>Explore <CaretDownFill></CaretDownFill></>}
                             {menuid != 1 && <>Explore <CaretDown></CaretDown></>}
                             </a>
                         </div>
                         <div> <a className={`UserLinks-deploy ${menuid==2 ? "opened" : ""}`} onClick={() => 
-                            {if (menuid == 2){SetMenuId(0)}else{SetMenuId(2)}}}>
+                            {if (menuid == 2){setMenuId(0)}else{setMenuId(2)}}}>
                             {menuid === 2 && <>Help <CaretDownFill></CaretDownFill></>}
                             {menuid != 2 && <>Help <CaretDown></CaretDown></>}
                             </a>
                         </div>
                         <div> <a className={`UserLinks-deploy ${menuid==3 ? "opened" : ""}`} onClick={() =>
-                            {if (menuid == 3){SetMenuId(0)}else{SetMenuId(3)}}}>
+                            {if (menuid == 3){setMenuId(0)}else{setMenuId(3)}}}>
                             {menuid === 3 && <>Account <CaretDownFill></CaretDownFill></>}
                             {menuid != 3 && <>Account <CaretDown></CaretDown></>}
                             </a>
@@ -89,8 +90,8 @@ const UserHeader = ( { children, showHeader = true }: Headerprops ) => {
                 </div>
 
                 <div className={`Dropdown_Setting ${showHeader && menuid==3 ? "openmenu" : "closemenu"}`}>
-                    <div> <Link to="/profile"> <PersonFill size={13}></PersonFill> Profile </Link> </div>
-                    <div> <Link to="/profile/settings"> <GearFill size={13}></GearFill> Settings </Link> </div>
+                    <div> <Link to={`/profile/${JSON.parse(localStorage.getItem("user") as string).username}`}> <PersonFill size={13}></PersonFill> Profile </Link> </div>
+                    <div> <Link to={`/profile/${JSON.parse(localStorage.getItem("user") as string).username}/settings`}> <GearFill size={13}></GearFill> Settings </Link> </div>
                     <hr />
                     <div> <a onClick={handle_logout}> <BoxArrowLeft size={13}></BoxArrowLeft> Log Out </a> </div>
                 </div>

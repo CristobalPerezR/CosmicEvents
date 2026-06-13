@@ -11,6 +11,16 @@ export const DeleteAccount_Service = async() => {
     }
 }
 
+export const UpdateDisplayname_Service = async(displayname: string) =>{
+    try{
+        const res = await axiosInstance.post("/update_displayname", {displayname: displayname});
+        return res.data;
+    } catch (error){
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
 export const UpdatePassword_Service = async(psw: string) =>{
     try{
         const res = await axiosInstance.post("/update_password", {psw: psw});
@@ -134,7 +144,6 @@ export const CheckPassword_Service = async(psw: string) =>{
         throw error;
     }
 }
-
 
 //#region LOCATIONS 
 

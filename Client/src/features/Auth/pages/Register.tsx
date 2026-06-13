@@ -15,29 +15,29 @@ const RegisterPage = () => {
   
   // REGISTER LOGIC
   const [username, setUsername] = useState("");
-  const [name, SetName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [checkpsw, SetCheckPsw] = useState<true | false | null>(null);
-  const [checkemail, SetCheckEmail] = useState<true | false | null>(null);
-  const [checkusername, SetCheckUsername] = useState<true | false | null>(null);
-  const [execute, SetExecute] = useState(false);
+  const [checkpsw, setCheckPsw] = useState<true | false | null>(null);
+  const [checkemail, setCheckEmail] = useState<true | false | null>(null);
+  const [checkusername, setCheckUsername] = useState<true | false | null>(null);
+  const [execute, setExecute] = useState(false);
    
-  const [dialog, SetDialog] = useState("");
-  const [msg, SetMsg] = useState("");
+  const [dialog, setDialog] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (confirmPassword == ""){
-      SetCheckPsw(null);
+      setCheckPsw(null);
     } else{
       if (password == confirmPassword) {
-        SetCheckPsw(true)
+        setCheckPsw(true)
       } else{
-        SetCheckPsw(false)
+        setCheckPsw(false)
       }
     }
   });
@@ -45,16 +45,16 @@ const RegisterPage = () => {
   const debouncedUsername = useDebounce<string>(username, 800);
   useEffect(() => {// Evitamos disparar la petición si el input está vacío
     if (!debouncedUsername.trim()) {
-      SetCheckUsername(null);
+      setCheckUsername(null);
       return;
     }
     const verifyUsername = async () => {
       try {
         const response = await CheckUsername_Service(debouncedUsername);
         if (response){
-          SetCheckUsername(false);
+          setCheckUsername(false);
         } else{
-          SetCheckUsername(true);
+          setCheckUsername(true);
         };
         
       } catch (error) {
@@ -68,16 +68,16 @@ const RegisterPage = () => {
   const debouncedEmail = useDebounce<string>(email, 800);
   useEffect(() => {// Evitamos disparar la petición si el input está vacío
     if (!debouncedEmail.trim()) {
-      SetCheckEmail(null);
+      setCheckEmail(null);
       return;
     }
     const verifyEmail = async () => {
       try {
         const response = await CheckEmail_Service(debouncedEmail);
         if (response){
-          SetCheckEmail(false);
+          setCheckEmail(false);
         } else{
-          SetCheckEmail(true);
+          setCheckEmail(true);
         };
         
       } catch (error) {
@@ -92,35 +92,35 @@ const RegisterPage = () => {
       e.preventDefault();
       if (checkusername && name && checkemail){
         if (checkpsw){
-          SetExecute(true);
+          setExecute(true);
         } else{
-          SetMsg("Passwords do not match.")
-          SetDialog("Failed");
+          setMsg("Passwords do not match.")
+          setDialog("Failed");
         }
       } else{
-        SetMsg("Please fill the form.")
-        SetDialog("Failed");
+        setMsg("Please fill the form.")
+        setDialog("Failed");
       }
 
       if (execute){
-        SetDialog("Loading");
+        setDialog("Loading");
         try{
             const res = await Register_Service(name, username, password, email);
             if (res.message === "User Created"){
-                SetMsg("");
-                SetDialog("Success");
+                setMsg("");
+                setDialog("Success");
 
                 setTimeout(() => {
                     navigate('/login');
                 }, 1000);
 
             } else{
-              SetMsg(res.message)
-              SetDialog("Failed")
+              setMsg(res.message)
+              setDialog("Failed")
             }
         } catch(err: any){
-            SetMsg("Something went wrong.");
-            SetDialog("Failed");
+            setMsg("Something went wrong.");
+            setDialog("Failed");
             console.log(err);
         }
       }
@@ -129,7 +129,7 @@ const RegisterPage = () => {
 
   return(
     <PublicHeader>
-      {<LoadingDialog modus={dialog} onClose={() => SetDialog("")} msg={msg}/>}
+      {<LoadingDialog modus={dialog} onClose={() => setDialog("")} msg={msg}/>}
       
       <main className="main-container-register">
         <div className="register-navbar">
@@ -158,7 +158,7 @@ const RegisterPage = () => {
                   type="text"
                   placeholder="Enter name"
                   value={name}
-                  onChange={(e) => SetName(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
